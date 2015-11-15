@@ -1,0 +1,34 @@
+New log file opened at Sun Nov 15 18:02:59 EST 2015 by 4840@Meaks-PC
+Taking next connection to: 50519
+New client attempting to connect on port: 50520-50519
+  Address = /192.168.2.8:50519
+This client on port 50520 has uuid 490db715-45be-46b2-8ff2-dd4bb890af8c configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
+Connected Clients: activator-490db715-45be-46b2-8ff2-dd4bb890af8c
+Taking next connection to: 50519
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 50519
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 50519
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 50519
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 50519
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 50519
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 50519
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 50519
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 50519
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 50519
