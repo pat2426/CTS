@@ -23,3 +23,5 @@ lazy val myProject = (project in file("."))
   .enablePlugins(PlayJava, PlayEbean)
 
 fork in run := true
+
+fork in run := true
