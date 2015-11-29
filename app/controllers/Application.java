@@ -1,49 +1,61 @@
 package controllers;
 
 import models.User;
+import play.*;
+import play.data.DynamicForm;
 import play.data.Form;
-import play.mvc.Controller;
-import play.mvc.Result;
+import play.mvc.*;
+
+import views.html.*;
 
 import static play.data.Form.form;
 
 public class Application extends Controller {
 
-    public static Result login() {
-
-        return ok(
-                login.render(form(Login.class))
-        );
+    public Result index() {
+        return ok(index.render("Your new application is ready."));
     }
 
-    public static class Login {
+    public Result login() {
+        DynamicForm userForm = form().bindFromRequest();
+        String username = userForm.data().get("username");
+        String password = userForm.data().get("password");
 
-        public String email;
-        public String password;
+        User user = User.find.where().eq("username", username).findUnique();
 
-        public String validate() {
-            if (User.authenticate(email, password) == null) {
-                return "Invalid user or password";
-            }
-            return null;
-        }
-
-    }
-
-    public static Result authenticate() {
-        Form<Login> loginForm = form(Login.class).bindFromRequest();
-        if (loginForm.hasErrors()) {
-            return badRequest(login.render(loginForm));
+        if(user != null && user.authenticate(password)) {
+            session("user_id", user.id.toString());
+            flash("success", "Welcome back " + user.username);
         } else {
-            session().clear();
-            session("email", loginForm.get().email);
-            return redirect(
-                    routes.Application.index()
-            );
+            flash("error", "Invalid login. Check your username and password.");
         }
+
+        return redirect(routes.Application.index());
+
     }
 
+    public Result signup() {
+        DynamicForm userForm = form().bindFromRequest();
+        String username = userForm.data().get("username");
+        String password = userForm.data().get("password");
+
+        User user = User.createNewUser(username, password);
+
+        if(user == null) {
+            flash("error", "Invalid user");
+            return redirect(routes.Application.index());
+        }
+
+        user.save();
+
+        flash("success", "Welcome new user " + user.username);
+        session("user_id", user.id.toString());
+        return redirect(routes.Application.index());
+    }
+
+    public Result logout() {
+        session().remove("user_id");
+        return redirect(routes.Application.index());
+    }
 
 }
-
-

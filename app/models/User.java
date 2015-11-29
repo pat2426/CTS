@@ -1,37 +1,62 @@
 package models;
 
 /**
- * Created by Meaks on 11/15/2015.
+ * A simple representation of a user. 
+ * @author Philip Johnson
  */
+public class User{
 
-import com.avaje.ebean.Model;
+    private String name;
+    private String email;
+    private String password;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
-@Entity
-public class User extends Model {
-
-    @Id
-    public String email;
-    public String password;
-    public String username;
-    public long id;
-    public boolean isAdmin;
-
-    public User(String email, String password, String username) {
+    /**
+     * Creates a new UserInfo instance.
+     * @param name The name.
+     * @param email The email.
+     * @param password The password.
+     */
+    public User(String name, String email, String password) {
+        this.name = name;
         this.email = email;
         this.password = password;
-        this.username = username;
     }
 
-
-    public static Finder<String,User> find = new Finder<String,User>(
-            String.class, User.class
-    );
-
-    public static User authenticate(String email, String password) {
-        return find.where().eq("email", email)
-                .eq("password", password).findUnique();
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
     }
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    /**
+     * @return the password
+     */
+    public String getPassword() {
+        return password;
+    }
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 }
