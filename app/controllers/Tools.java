@@ -1,8 +1,10 @@
 package controllers;
 
+
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import views.html.Tools.*;
 
 import java.util.List;
 
@@ -12,6 +14,7 @@ import java.util.List;
 public class Tools extends Controller {
 
     private static final Form<Tools> toolsForm = Form.form(Tools.class);
+    private static  details;
 
     public static Result list() {
         List<Tools> tools = Tools.findAll();
@@ -30,6 +33,9 @@ public class Tools extends Controller {
 
         Form<Tools> filledForm = toolsForm.fill(tools);
         return ok(details.render(filledForm));
+    }
+
+    private static controllers.Tools findByPlace(String place) {
     }
 
     public static Result save(){
