@@ -5,6 +5,11 @@
 # Home page
 GET     /                           controllers.Application.index()
 
+GET         /products/                   controllers.Tools.list()
+GET         /products/new                controllers.Tools.newTools()
+GET         /products/:ean               controllers.Tools.details(place: String)
+POST        /products/                   controllers.Tools.save()
+DELETE      /products/:ean               controllers.Tools.delete(place: String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
