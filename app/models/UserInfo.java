@@ -1,10 +1,9 @@
 package models;
 
 /**
- * A simple representation of a user. 
- * @author Philip Johnson
+ * Created by Meaks on 12/1/2015.
  */
-public class User{
+public class UserInfo {
 
     private String name;
     private String email;
@@ -16,7 +15,7 @@ public class User{
      * @param email The email.
      * @param password The password.
      */
-    public User(String name, String email, String password) {
+    public UserInfo(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.password = password;

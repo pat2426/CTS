@@ -1,0 +1,21 @@
+@(toolsForm: Form[Tools])
+@import helper ._
+@import helper.twitterBootstrap._
+
+@main("Tools form"){
+
+    <h1>Create a tool</h1>
+
+@helper.form(action = routes.Tools.save()){
+    <fieldset>
+        <legend>Tools(@toolsForm("name").valueOr("New"))</legend>
+        @helper.inputText(toolsForm("place"), '_label -> "PLACE")
+        @helper.inputText(toolsForm("name"), '_label -> "Name")
+        @helper.textarea(toolsForm("description"), '_label -> "Description")
+
+    </fieldset>
+<input type="submit" class="btn btn-primary" value="Save">
+<a class="btn" href="@routes.Application.index()">Cancel</a>
+    }
+}
+
