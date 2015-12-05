@@ -5,6 +5,11 @@
 # Home page
 GET     /                           controllers.Application.index()
 
+#tools pages
+GET     /Tools                           controllers.Application.Tools()
+POST    /Tools                           controllers.Application.newTools()
+POST    /Tools/:id/delete                controllers.Application.deleteTools(id: Long)
+
 
 
 # Map static resources from the /public folder to the /assets URL path

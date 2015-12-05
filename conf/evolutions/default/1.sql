@@ -6,7 +6,9 @@
 create table tools (
   id                        bigint not null,
   name                      varchar(255),
-  folder                    varchar(255),
+  description               varchar(255),
+  type                      varchar(255),
+  section                   varchar(255),
   constraint pk_tools primary key (id))
 ;
 
