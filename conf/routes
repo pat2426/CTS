@@ -3,6 +3,7 @@
 # ~~~~
 
 # Home page
+<<<<<<< HEAD
 GET         /                            controllers.Application.index()
 
 GET         /products/                   controllers.Products.list()
@@ -11,6 +12,9 @@ GET         /products/:ean               controllers.Products.details(ean: Strin
 POST        /products/                   controllers.Products.save()
 DELETE      /products/:ean               controllers.Products.delete(ean: String)
 
+=======
+GET     /                           controllers.Application.index()
+>>>>>>> c971860f60a9a899e2515115e56682ca0bbb74dc
 
 
 

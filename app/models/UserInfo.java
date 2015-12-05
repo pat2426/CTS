@@ -1,5 +1,8 @@
 package models;
 
+import javax.persistence.Id;
+
+import org.h2.engine.User;
 import play.db.ebean.Model;
 
 import javax.persistence.Entity;
@@ -22,6 +25,7 @@ public class UserInfo extends Model {
         this.password = password;
     }
 
+
     public static Finder<String,UserInfo> find = new Finder<String,UserInfo>(
             String.class, UserInfo.class
     );
@@ -30,4 +34,8 @@ public class UserInfo extends Model {
         return find.where().eq("email", email)
                 .eq("password", password).findUnique();
     }
+
+    public static Finder<String,User> find = new Finder<String,User>(
+            String.class, User.class
+    );
 }

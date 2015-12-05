@@ -1,10 +1,14 @@
 @(title: String)(content: Html)
+<<<<<<< HEAD
 
+=======
+>>>>>>> c971860f60a9a899e2515115e56682ca0bbb74dc
 <!DOCTYPE html>
 
 <html>
 <head>
     <title>@title</title>
+<<<<<<< HEAD
     <link href="@routes.Assets.at("bootstrap/css/bootstrap.min.css")" rel="stylesheet" media="screen">
     <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
     <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
@@ -23,4 +27,17 @@
     }
   @content
   </body>
+=======
+    <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}" />
+    <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/main.css'}" />
+    <script src="@routes.Assets.at("javascripts/jquery-1.7.1.min.js")"type="text/javascript">
+</head>
+
+
+
+
+    <body>
+        @content
+    </body>
+>>>>>>> c971860f60a9a899e2515115e56682ca0bbb74dc
 </html>

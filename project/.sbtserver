@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 #Server Startup at 2015-12-05T15:23+0000
 #Sat Dec 05 10:23:48 EST 2015
 server.uri=http\://0.0.0.0\:49313
+=======
+#Server Startup at 2015-12-02T22:17+0000
+#Wed Dec 02 17:17:08 EST 2015
+server.uri=http\://0.0.0.0\:49402
+>>>>>>> c971860f60a9a899e2515115e56682ca0bbb74dc
