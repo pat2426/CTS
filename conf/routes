@@ -3,12 +3,14 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index()
+GET         /                            controllers.Application.index()
 
-#tools pages
-GET     /Tools                           controllers.Application.Tools()
-POST    /Tools                           controllers.Application.newTools()
-POST    /Tools/:id/delete                controllers.Application.deleteTools(id: Long)
+GET         /products/                   controllers.Products.list()
+GET         /products/new                controllers.Products.newProduct()
+GET         /products/:ean               controllers.Products.details(ean: String)
+POST        /products/                   controllers.Products.save()
+DELETE      /products/:ean               controllers.Products.delete(ean: String)
+
 
 
 

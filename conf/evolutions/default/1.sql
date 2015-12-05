@@ -3,13 +3,10 @@
 
 # --- !Ups
 
-create table tools (
-  id                        bigint not null,
+create table product (
+  ean                       varchar(255),
   name                      varchar(255),
-  description               varchar(255),
-  type                      varchar(255),
-  section                   varchar(255),
-  constraint pk_tools primary key (id))
+  description               varchar(255))
 ;
 
 create table user_info (
@@ -18,8 +15,6 @@ create table user_info (
   password                  varchar(255),
   constraint pk_user_info primary key (email))
 ;
-
-create sequence tools_seq;
 
 create sequence user_info_seq;
 
@@ -30,13 +25,11 @@ create sequence user_info_seq;
 
 SET REFERENTIAL_INTEGRITY FALSE;
 
-drop table if exists tools;
+drop table if exists product;
 
 drop table if exists user_info;
 
 SET REFERENTIAL_INTEGRITY TRUE;
-
-drop sequence if exists tools_seq;
 
 drop sequence if exists user_info_seq;
 
