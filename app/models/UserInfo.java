@@ -1,61 +1,29 @@
 package models;
 
+import org.h2.engine.User;
+import play.db.ebean.Model;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  * Created by Meaks on 12/1/2015.
  */
-public class UserInfo {
+@Entity
+public class UserInfo extends Model {
 
-    private String name;
-    private String email;
-    private String password;
+    @Id
+    public String email;
+    public String name;
+    public String password;
 
-    /**
-     * Creates a new UserInfo instance.
-     * @param name The name.
-     * @param email The email.
-     * @param password The password.
-     */
-    public UserInfo(String name, String email, String password) {
-        this.name = name;
+    public UserInfo(String email, String name, String password) {
         this.email = email;
+        this.name = name;
         this.password = password;
     }
 
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-    /**
-     * @return the email
-     */
-    public String getEmail() {
-        return email;
-    }
-    /**
-     * @param email the email to set
-     */
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    /**
-     * @return the password
-     */
-    public String getPassword() {
-        return password;
-    }
-    /**
-     * @param password the password to set
-     */
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
+    public static Finder<String,User> find = new Finder<String,User>(
+            String.class, User.class
+    );
 }
