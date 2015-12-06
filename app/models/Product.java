@@ -1,21 +1,35 @@
 package models;
 
 import play.data.validation.Constraints;
+import play.libs.F;
+import play.mvc.PathBindable;
+import play.mvc.QueryStringBindable;
 
-import javax.persistence.Entity;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-/**
- * Created by Meaks on 12/5/2015.
- */
-@Entity
-public class Product {
 
-    private static List<Product> products;
+public class Product implements PathBindable<Product>,
+        QueryStringBindable<Product> {
+
+    public static class EanValidator extends Constraints.Validator<String> {
+
+        @Override
+        public boolean isValid(String value) {
+            String pattern = "^[0-9]{13}$";
+            return value != null && value.matches(pattern);
+        }
+
+        @Override
+        public F.Tuple<String, Object[]> getErrorMessageKey() {
+            return new F.Tuple<String, Object[]>("error.invalid.ean",
+                    new String[]{});
+        }
+    }
+
+    private static Set<Product> products;
 
     static {
-        products = new ArrayList<Product>();
+        products = new HashSet<Product>();
         products.add(new Product("1111111111111", "Paperclips 1",
                 "Paperclips description 1"));
         products.add(new Product("2222222222222", "Paperclips 2",
@@ -29,10 +43,14 @@ public class Product {
     }
 
     @Constraints.Required
+    @Constraints.ValidateWith(EanValidator.class)
     public String ean;
     @Constraints.Required
     public String name;
     public String description;
+    public byte[] picture;
+
+    public List<Tag> tags = new LinkedList<>();
 
     public Product() {
     }
@@ -47,8 +65,8 @@ public class Product {
         return String.format("%s - %s", ean, name);
     }
 
-    public static List<Product> findAll() {
-        return new ArrayList<Product>(products);
+    public static Set<Product> findAll() {
+        return new HashSet<Product>(products);
     }
 
     public static Product findByEan(String ean) {
@@ -60,8 +78,8 @@ public class Product {
         return null;
     }
 
-    public static List<Product> findByName(String term) {
-        final List<Product> results = new ArrayList<Product>();
+    public static Set<Product> findByName(String term) {
+        final Set<Product> results = new HashSet<Product>();
         for (Product candidate : products) {
             if (candidate.name.toLowerCase().contains(term.toLowerCase())) {
                 results.add(candidate);
@@ -80,5 +98,24 @@ public class Product {
         products.add(this);
     }
 
+    @Override
+    public Product bind(String key, String value) {
+        return findByEan(value);
+    }
+
+    @Override
+    public F.Option<Product> bind(String key, Map<String, String[]> data) {
+        return F.Option.Some(findByEan(data.get("ean")[0]));
+    }
+
+    @Override
+    public String unbind(String s) {
+        return this.ean;
+    }
+
+    @Override
+    public String javascriptUnbind() {
+        return this.ean;
+    }
 }
 

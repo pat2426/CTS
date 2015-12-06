@@ -4,12 +4,18 @@
 
 # Home page
 
+GET     /                           controllers.Application.index()
+POST    /login                      controllers.Application.login()
+POST    /signup                     controllers.Application.signup()
+GET     /logout                     controllers.Application.logout()
+
+
 GET  /                     controllers.Products.index()
 GET  /products/            controllers.Products.list(page: Integer ?= 1)
 POST /products/            controllers.Products.save()
 GET  /products/new         controllers.Products.newProduct()
-GET  /products/:ean        controllers.Products.details(ean: String)
-DELETE      /products/:ean               controllers.Products.delete(ean: String)
+GET  /products/:ean        controllers.Products.details(ean:models.Product)
+GET  /picture/:ean         controllers.Products.picture(ean)
 
 
 

@@ -1,50 +1,21 @@
-@(products: List[Product])
-@main("Products catalogue") {
+@(products: Set[Product])
 
-<h2>All products</h2>
+@main("Tools catalogue") {
 
-<script>
-     function del(urlToDelete) {
-        $.ajax({
-          url: urlToDelete,
-          type: 'DELETE',
-          success: function(results) {
-            // Refresh the page
-            location.reload();
-          }
-        });
-      }
-   </script>
+<h1>All Tools</h1>
 
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th>EAN</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
+<dl>
     @for(product <- products) {
+    <dt>
 
-    <tr>
-        <td><a href="@routes.Products.details(product.ean)">
-            @product.ean
-        </a></td>
-        <td><a href="@routes.Products.details(product.ean)">@product.name</a></td>
-        <td><a href="@routes.Products.details(product.ean)">@product.name</a></td>
-        <td>
-            <a href="@routes.Products.details(product.ean)"><i class="icon icon-pencil"></i></a>
-            <a onclick="javascript:del('@routes.Products.delete(product.ean)')"><i class="icon icon-trash"></i></a>
-        </td>
-    </tr>
+        <a href="@routes.Products.details(product)">
+            <i class="icon icon-pencil"></i>
+            @product.ean - @product.name
+        </a>
+    </dt>
+    <dd>@product.description</dd>
     }
-
-    </tbody>
-</table>
-
-
+</dl>
 
 <a href="@routes.Products.newProduct()" class="btn">
     <i class="icon-plus"></i> New product</a>

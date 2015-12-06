@@ -3,21 +3,15 @@
 
 # --- !Ups
 
-create table product (
-  ean                       varchar(255),
-  name                      varchar(255),
-  description               varchar(255))
-;
-
-create table user (
+create table users (
   id                        bigint not null,
-  email                     varchar(255),
-  password                  varchar(255),
-  name                      varchar(255),
-  constraint pk_user primary key (id))
+  username                  varchar(255),
+  password_hash             varchar(255),
+  constraint uq_users_username unique (username),
+  constraint pk_users primary key (id))
 ;
 
-create sequence user_seq;
+create sequence users_seq;
 
 
 
@@ -26,11 +20,9 @@ create sequence user_seq;
 
 SET REFERENTIAL_INTEGRITY FALSE;
 
-drop table if exists product;
-
-drop table if exists user;
+drop table if exists users;
 
 SET REFERENTIAL_INTEGRITY TRUE;
 
-drop sequence if exists user_seq;
+drop sequence if exists users_seq;
 
