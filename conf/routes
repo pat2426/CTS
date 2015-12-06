@@ -3,20 +3,16 @@
 # ~~~~
 
 # Home page
-<<<<<<< HEAD
-GET         /                            controllers.Application.index()
 
-GET         /products/                   controllers.Products.list()
-GET         /products/new                controllers.Products.newProduct()
-GET         /products/:ean               controllers.Products.details(ean: String)
-POST        /products/                   controllers.Products.save()
+GET  /                     controllers.Products.index()
+GET  /products/            controllers.Products.list(page: Integer ?= 1)
+POST /products/            controllers.Products.save()
+GET  /products/new         controllers.Products.newProduct()
+GET  /products/:ean        controllers.Products.details(ean: String)
 DELETE      /products/:ean               controllers.Products.delete(ean: String)
-
-=======
-GET     /                           controllers.Application.index()
->>>>>>> c971860f60a9a899e2515115e56682ca0bbb74dc
 
 
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
+

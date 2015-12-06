@@ -4,6 +4,7 @@ import models.Product;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.With;
 import views.html.products.details;
 import views.html.products.list;
 
@@ -12,16 +13,22 @@ import java.util.List;
 /**
  * Created by Meaks on 12/5/2015.
  */
+
+@With(CatchAction.class)
 public class Products extends Controller {
 
     private  final Form<Product> productForm = Form.form(Product.class);
 
-    public Result list() {
+    public  Result index() {
+        return redirect(routes.Products.list(1));
+    }
+
+    public  Result list(int page) {
         List<Product> products = Product.findAll();
         return ok(list.render(products));
     }
 
-    public Result newProduct() {
+    public  Result newProduct() {
         return ok(details.render(productForm));
     }
 
@@ -35,7 +42,7 @@ public class Products extends Controller {
         return ok(details.render(filledForm));
     }
 
-    public Result save() {
+    public  Result save() {
         Form<Product> boundForm = productForm.bindFromRequest();
         if(boundForm.hasErrors()) {
             flash("error", "Please correct the form below.");
@@ -47,7 +54,7 @@ public class Products extends Controller {
         flash("success",
                 String.format("Successfully added product %s", product));
 
-        return redirect(routes.Products.list());
+        return redirect(routes.Products.list(1));
     }
 
     public  Result delete(String ean) {
@@ -56,6 +63,6 @@ public class Products extends Controller {
             return notFound(String.format("Product %s does not exists.", ean));
         }
         Product.remove(product);
-        return redirect(routes.Products.list());
+        return redirect(routes.Products.list(1));
     }
 }
