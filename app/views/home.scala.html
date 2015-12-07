@@ -1,0 +1,122 @@
+@(message: String)
+
+
+@main("Community Tool Sharing Platform") {
+
+<head>
+
+    <title>Community Tool Sharing Platform</title>
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+
+</head>
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Community Tool Sharing Platform</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="#about"><span class="glyphicon glyphicon-home"
+                                           aria-hidden="true"></span> About Us</a></li>
+                <li> <a href="#share"> <span class="glyphicon glyphicon-share" aria-hidden="true"></span>Why You Should Share</a></li>
+                <li><a href="@routes.Application.index()">Sign Up</a></li>
+                <li>
+                    <a id="modal_trigger" href="@routes.Application.index()" class="btn" role="button" aria-haspopup="true" aria-expanded="false">
+                        Login </a>
+                </li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<header class="jumbotron">
+
+    <!-- Main component for a primary marketing message or call to action -->
+
+    <div class="container">
+        <div class="row row-header">
+            <div class="col-xs-12 col-sm-8">
+                <h1>Community Tool Sharing Platform</h1>
+                <p style="padding:40px;"></p>
+                <p>Here You can share with anyone in your community, whether you need a hammer for a day or a week. Come find out what you can share and borrow.</p>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="about" class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-9">
+            <h2 > About Us </h2>
+            <p>We are a community sharing platform. We encourage the use of sharing with one another, nothing feels better
+                than helping someone out. If you need to find an item that you need at the moment, but don't want to buy it because
+                you only need it for a few hours, then come and browse this platform. You can find all types of items for your daily
+                or weekly use. We come to serve our community in every means, let us help us thats the only way we can succeed.
+            </p>
+        </div>
+        <div class="col-xs-12 col-sm-3">
+            <h3>Finding Out Who we are</h3>
+        </div>
+    </div>
+</div>
+
+<div id="share" class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-9">
+            <h2> Share With Us </h2>
+            <p >Sharing is definitly caring and who doesn't love to care for others. This sharing platform, helps everyone
+                in the community help one another out and give people a feel of being looked after in there community. We All want things,
+                that sometimes we just can't afford, so why not ask a neighbor instead of coming out of pocket big time. If you help someone
+                that favor will come back around to you, and someone will help you just like you did for another. So join in and help
+                your community out today.
+            </p>
+        </div>
+        <div class="col-xs-12 col-sm-3">
+            <h3>It's Important to Share</h3>
+        </div>
+    </div>
+</div>
+
+
+
+<footer id="contact" class="row-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-5 col-xs-offset-1 col-sm-2 col-sm-offset-1">
+                <h5>Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About US</a></li>
+                    <li><a href="#">Share With Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div  class="col-xs-6 col-sm-5">
+                <h5>Our Address</h5>
+                <address>
+                    Cuny Graduate Center<br>
+                    Manhattan, New York<br>
+                    New York, New York<br>
+                    <i class="fa fa-phone"></i>: +852 1234 5678<br>
+                    <i class="fa fa-fax"></i>: +852 8765 4321<br>
+                    <i class="fa fa-envelope"></i>:
+                    <a href="mailto:cunytechprep">confusion@food.net</a>
+                </address>
+            </div>
+
+        </div>
+    </div>
+</footer>
+}
+

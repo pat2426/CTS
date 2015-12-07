@@ -4,6 +4,7 @@ import models.User;
 import play.data.DynamicForm;
 import play.mvc.Controller;
 import play.mvc.Result;
+import views.html.home;
 import views.html.index;
 
 import static play.data.Form.form;
@@ -15,6 +16,10 @@ public class Application extends Controller {
 
     public Result index() {
         return ok(index.render("Your new application is ready."));
+    }
+
+    public Result home(){
+        return ok(home.render("This is the home page"));
     }
 
     public Result login() {
