@@ -43,4 +43,6 @@ public class Global extends GlobalSettings {
         Formatters.register(Date.class, new Formats.AnnotationDateFormatter());
 
     }
+
+
 }

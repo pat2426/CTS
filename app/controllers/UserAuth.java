@@ -10,7 +10,6 @@ import play.mvc.Security;
  */
 public class UserAuth extends Security.Authenticator {
 
-    // When return is null, Authentication failed
     @Override
     public String getUsername(final Http.Context ctx) {
         String userIdStr = ctx.session().get("user_id");

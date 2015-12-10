@@ -6,6 +6,7 @@ import models.Tag;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 import play.mvc.With;
 import views.html.products.details;
 import views.html.products.list;
@@ -37,6 +38,7 @@ public class Products extends Controller {
         return ok(list.render(products));
     }
 
+    @Security.Authenticated(UserAuth.class)
     public  Result newProduct() {
         return ok(details.render(productForm));
     }
@@ -46,6 +48,8 @@ public class Products extends Controller {
         return ok(details.render(filledForm));
     }
 
+
+    @Security.Authenticated(UserAuth.class)
     public  Result save() {
         MultipartFormData body = request().body().asMultipartFormData();
         Form<Product> boundForm = productForm.bindFromRequest();

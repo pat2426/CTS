@@ -4,12 +4,13 @@
 
 # Home page
 
-GET     /                           controllers.Application.index()
 GET     /home                       controllers.Application.home()
+GET     /                           controllers.Application.index()
 POST    /login                      controllers.Application.login()
 POST    /signup                     controllers.Application.signup()
 GET     /logout                     controllers.Application.logout()
 
+#Tools
 
 GET  /                     controllers.Products.index()
 GET  /products/            controllers.Products.list(page: Integer ?= 1)

@@ -14,12 +14,14 @@ import static play.data.Form.form;
  */
 public class Application extends Controller {
 
-    public Result index() {
-        return ok(index.render("Your new application is ready."));
-    }
+
 
     public Result home(){
         return ok(home.render("This is the home page"));
+    }
+
+    public Result index() {
+        return ok(index.render("Your new application is ready."));
     }
 
     public Result login() {
@@ -36,7 +38,7 @@ public class Application extends Controller {
             flash("error", "Invalid login. Check your username and password.");
         }
 
-        return redirect(routes.Application.index());
+        return redirect(routes.Application.home());
 
     }
 
@@ -56,12 +58,15 @@ public class Application extends Controller {
 
         flash("success", "Welcome new user " + user.username);
         session("user_id", user.id.toString());
-        return redirect(routes.Application.index());
+        return redirect(routes.Application.home());
     }
 
     public Result logout() {
         session().remove("user_id");
         return redirect(routes.Application.index());
     }
+
+
+
 
 }

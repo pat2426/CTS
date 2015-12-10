@@ -1,5 +1,6 @@
 package models;
 
+import com.avaje.ebean.Model;
 import play.data.validation.Constraints;
 import play.libs.F;
 import play.mvc.PathBindable;
@@ -51,6 +52,7 @@ public class Product implements PathBindable<Product>,
     public byte[] picture;
 
     public List<Tag> tags = new LinkedList<>();
+    public static Model.Finder<Long, Product> find = new Model.Finder<Long, Product>(Product.class);
 
     public Product() {
     }
