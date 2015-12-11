@@ -1,23 +1,17 @@
 package controllers;
 
-import com.google.common.io.Files;
+import Utils.ExceptionMailer;
+import com.avaje.ebean.Model;
 import models.Product;
 import models.Tag;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import play.mvc.Security;
 import play.mvc.With;
-import views.html.products.details;
-import views.html.products.list;
+import views.html.products.*;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-
-import static play.mvc.Http.MultipartFormData;
 
 
 /**
@@ -33,61 +27,132 @@ public class Products extends Controller {
         return redirect(routes.Products.list(1));
     }
 
-    public  Result list(Integer page) {
-        Set<Product> products = Product.findAll();
-        return ok(list.render(products));
+    public Result list( Integer page ) {
+
+        List<Product> product = new Model.Finder<String, Product>(String.class , Product.class).all();
+
+        return ok(list.render(product));
+
     }
 
-    @Security.Authenticated(UserAuth.class)
-    public  Result newProduct() {
+    public Result show(String ean) {
+
+        Product product =  Product.find.byId(ean) ;
+
+        return TODO; //ok(detail.render(p)); 
+
+    }
+
+    public Result newProduct() {
+
         return ok(details.render(productForm));
+
     }
 
-    public Result details(Product product) {
+
+    /* implement remember last page number*/
+    public Result details(String ean) {
+
+        final Product product = Product.find.byId(ean);
+
+        if (product == null) {
+
+            flash("error",
+                    String.format("Product %s does not exist.", ean)
+            );
+
+            //return notFound(String.format("Product %s does not exist.", ean));
+            return redirect(routes.Products.list(1));
+        }
+
         Form<Product> filledForm = productForm.fill(product);
+
         return ok(details.render(filledForm));
     }
 
+    public Result save() {
 
-    @Security.Authenticated(UserAuth.class)
-    public  Result save() {
-        MultipartFormData body = request().body().asMultipartFormData();
         Form<Product> boundForm = productForm.bindFromRequest();
+
         if(boundForm.hasErrors()) {
-            flash("error", "Please correct the form below.");
+            flash("error",
+                    "Please correct the form below.");
             return badRequest(details.render(boundForm));
         }
+
         Product product = boundForm.get();
 
-        MultipartFormData.FilePart part = body.getFile("picture");
-        if(part != null) {
-            File picture = part.getFile();
 
-            try {
-                product.picture = Files.toByteArray(picture);
-            } catch (IOException e) {
-                return internalServerError("Error reading file upload");
-            }
-        }
+        //ExceptionMailer.log(product.toString());
+        ExceptionMailer.log( "\tTags id: " + product.tags.size()) ;
+    		/*
+    		for ( Tag t : product.tags) {
+    			ExceptionMailer.log( "\tTags: " + t.name);
+    		}
+    		*/
+
+
 
         List<Tag> tags = new ArrayList<Tag>();
         for (Tag tag : product.tags) {
+            ExceptionMailer.log( "\tTags: " + tag.toString());
             if (tag.id != null) {
-                tags.add(Tag.findById(tag.id));
+                tags.add(Tag.find.byId(tag.id));
+                ;
             }
         }
         product.tags = tags;
 
-        product.save();
+
+        final Product p = Product.find.byId(product.ean);
+        String result = "";
+        if ( p == null) {
+            product.save();
+            result = tags.size() +  " - Successfully added product %s";
+        } else {
+            product.update();
+            result = "Successfully updated product %s";
+        }
+
         flash("success",
-                String.format("Successfully added product %s", product));
+                String.format( result, product)
+        );
+
+        return redirect(routes.Products.list(1));
+
+    }
+
+
+    public Result delete(String ean) {
+
+        final Product product = Product.find.byId(ean);
+
+        if(product == null) {
+
+            flash("error",
+                    String.format("Product %s does not exist.", ean)
+            );
+
+            //return notFound(String.format("Product %s does not exists.", ean));
+
+        } else {
+
+            product.delete();
+            flash("success",
+                    String.format("Successfully updated product %s", product)
+            );
+
+        }
+
 
         return redirect(routes.Products.list(1));
     }
 
-    public  Result picture(String ean) {
-        final Product product = Product.findByEan(ean);
+    public Result picture(String ean) {
+        final Product product = Product.find.byId(ean);
         if(product == null) return notFound();
         return ok(product.picture);
     }
+
 }
+

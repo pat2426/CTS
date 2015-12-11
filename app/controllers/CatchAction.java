@@ -11,10 +11,14 @@ import play.mvc.Result;
  */
 public class CatchAction extends Action.Simple{
 
-    public F.Promise<Result> call(Http.Context ctx) {
+    @Override
+    public F.Promise<Result> call(Http.Context ctx) throws Throwable {
+
         try {
+            ExceptionMailer.log( ctx.request().method() + "\t" + ctx.request().path());
+
             return delegate.call(ctx);
-        } catch (Throwable e) {
+        } catch(Throwable e) {
             ExceptionMailer.send(e);
             throw new RuntimeException(e);
         }
