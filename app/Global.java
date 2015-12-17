@@ -1,6 +1,6 @@
+import Utils.AnnotationDateFormatter;
 import play.Application;
 import play.GlobalSettings;
-import play.data.format.Formats;
 import play.data.format.Formatters;
 import play.data.format.Formatters.SimpleFormatter;
 
@@ -22,7 +22,7 @@ public class Global extends GlobalSettings {
 
                     public Date parse(String text, Locale locale)
                             throws java.text.ParseException {
-                        if (text == null || text.trim().isEmpty()) {
+                        if(text == null || text.trim().isEmpty()) {
                             return null;
                         }
                         SimpleDateFormat sdf =
@@ -31,8 +31,8 @@ public class Global extends GlobalSettings {
                         return sdf.parse(text);
                     }
 
-                    public String print(Date value, Locale locale) {
-                        if (value == null) {
+                    public String print(Date value, Locale locale){
+                        if(value == null) {
                             return "";
                         }
                         return new SimpleDateFormat(PATTERN, locale)
@@ -40,10 +40,12 @@ public class Global extends GlobalSettings {
                     }
 
                 });
-        Formatters.register(Date.class, new Formats.AnnotationDateFormatter());
+        Formatters.register(Date.class, new AnnotationDateFormatter());
 
     }
 
 
 
-}
+    }
+
+

@@ -1,16 +1,14 @@
 package controllers;
 
-import Utils.ExceptionMailer;
 import com.avaje.ebean.Model;
 import models.Product;
-import models.Tag;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.With;
-import views.html.products.*;
+import views.html.products.details;
+import views.html.products.list;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -39,7 +37,7 @@ public class Products extends Controller {
 
         Product product =  Product.find.byId(ean) ;
 
-        return TODO; //ok(detail.render(p)); 
+        return TODO; //ok(detail.render(p));
 
     }
 
@@ -83,32 +81,12 @@ public class Products extends Controller {
         Product product = boundForm.get();
 
 
-        //ExceptionMailer.log(product.toString());
-        ExceptionMailer.log( "\tTags id: " + product.tags.size()) ;
-    		/*
-    		for ( Tag t : product.tags) {
-    			ExceptionMailer.log( "\tTags: " + t.name);
-    		}
-    		*/
-
-
-
-        List<Tag> tags = new ArrayList<Tag>();
-        for (Tag tag : product.tags) {
-            ExceptionMailer.log( "\tTags: " + tag.toString());
-            if (tag.id != null) {
-                tags.add(Tag.find.byId(tag.id));
-                ;
-            }
-        }
-        product.tags = tags;
-
 
         final Product p = Product.find.byId(product.ean);
         String result = "";
         if ( p == null) {
             product.save();
-            result = tags.size() +  " - Successfully added product %s";
+
         } else {
             product.update();
             result = "Successfully updated product %s";
@@ -151,7 +129,7 @@ public class Products extends Controller {
     public Result picture(String ean) {
         final Product product = Product.find.byId(ean);
         if(product == null) return notFound();
-        return ok(product.picture);
+        return redirect(routes.Products.list(1));
     }
 
 }

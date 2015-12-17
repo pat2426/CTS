@@ -14,23 +14,7 @@ import java.util.List;
 @Entity
 public class Product extends Model {
 
-    /*
-     * Constructor
-     */
-    public Product(String ean, String name, String description, List<Tag> tags) {
-        super();
-        this.ean = ean;
-        this.name = name;
-        this.description = description;
-        this.tags = tags;
-    }
 
-    public Product(String ean, String name, String description) {
-        super();
-        this.ean = ean;
-        this.name = name;
-        this.description = description;
-    }
 
 
     /*
@@ -46,8 +30,7 @@ public class Product extends Model {
     @Constraints.MinLength(value = 10)
     public String description;
 
-    @ManyToMany(cascade= CascadeType.ALL)
-    public List<Tag> tags = new LinkedList<Tag>();
+
 
     public byte[] picture;
 
@@ -86,13 +69,7 @@ public class Product extends Model {
         this.description = description;
     }
 
-    public List<Tag> getTags() {
-        return tags;
-    }
 
-    public void setTags(List<Tag> tags) {
-        this.tags = tags;
-    }
 
 
 
