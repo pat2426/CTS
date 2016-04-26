@@ -1,9 +1,9 @@
-
+@(products: List[Product])
 
 @main("Tools catalogue") {
 <h2>All Tools</h2>
 
-<script>
+<script type="text/javascript">
              function del(urlToDelete) {
                $.ajax({
                  url: urlToDelete,
@@ -29,6 +29,7 @@
     </thead>
     <tbody>
     @for(product <- products) {
+        
     <tr>
         <td>
             <a href="#body2"> @product.ean</a>
@@ -47,9 +48,7 @@
             <a onclick="del('@routes.Products.delete(product.ean)')">
                 <i class="glyphicon glyphicon-trash"></i>
             </a>
-            <a href="@routes.Products.display()">
-
-            </a>
+           
         </td>
     </tr>
     }

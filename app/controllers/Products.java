@@ -31,9 +31,9 @@ public class Products extends Controller {
 
     public Result list( Integer page ) {
 
-        List<Product> product = new Model.Finder<String, Product>(String.class , Product.class).all();
+        List<Product> products = new Model.Finder<String, Product>(String.class , Product.class).all();
 
-        return ok(list.render());
+        return ok(list.render(products));
 
     }
 
