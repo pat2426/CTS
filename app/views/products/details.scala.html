@@ -9,8 +9,8 @@
     <legend>Create (@productForm("name").valueOr("New")) Tools</legend>
     @helper.inputText(productForm("ean"), '_label -> "EAN")
     @helper.inputText(productForm("name"),'_label -> "Name")
-    @helper.inputText(productForm("date"),'_label -> "Date")
-    @helper.inputText(productForm("peremptionDate"),'_label -> "Peremption date")
+    @helper.inputText(productForm("date"),'_label -> "Date Borrowing ")
+    @helper.inputText(productForm("peremptionDate"),'_label -> "Date Returning")
 
     @helper.textarea(productForm("description"), '_label -> "Description")
     @helper.inputFile(productForm("picture"))

@@ -2,6 +2,7 @@ package controllers;
 
 import models.User;
 import play.data.DynamicForm;
+import play.data.validation.Constraints;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.home;
@@ -65,9 +66,6 @@ public class Application extends Controller {
         session().remove("user_id");
         return redirect(routes.Application.index());
     }
-
-
-
 
 
 }

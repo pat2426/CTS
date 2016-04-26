@@ -15,6 +15,7 @@ import java.util.Date;
 @Entity
 public class Comments extends Model {
 
+
     @Constraints.Required
     public String User;
     public Date postedAt;
@@ -31,6 +32,12 @@ public class Comments extends Model {
         this.content = content;
         this.postedAt = new Date();
     }
+
+    public static void addComment(String author, String content) {
+
+
+    }
+
 
 }
 

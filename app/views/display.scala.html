@@ -1,0 +1,58 @@
+@(products: List[Product])
+
+
+@main("Tools") {
+
+<div id="body2">
+    @for(product <- products) {
+
+    <h2>@product.ean</h2>
+
+    <div class="container">
+        <div class="row row-header">
+            <div class="col-xs-12 col-sm-8">
+                <h1>@product.name</h1>
+                <p>@product.description</p>
+            </div>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+                <div>
+                    @product.picture
+                    <img src="" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <label for="author">Your name: </label>
+    <input type="text" name="author" id="author" />
+
+
+    <label for="content">Your message: </label>
+    <textarea name="content" id="content"></textarea>
+
+
+    <input type="submit" value="Submit your comment" />
+
+
+
+<script type="text/javascript" charset="utf-8">
+    $(function() {
+        // Expose the form
+        $('form').click(function() {
+            $('form').expose({api: true}).load();
+        });
+
+        // If there is an error, focus to form
+        if($('form .error').size()) {
+            $('form').expose({api: true, loadSpeed: 0}).load();
+            $('form input[type=text]').get(0).focus();
+        }
+    });
+</script>
+
+    }
+
+</div>
+}

@@ -1,14 +1,18 @@
 package controllers;
 
 import com.avaje.ebean.Model;
+import com.google.common.io.Files;
 import models.Product;
 import play.data.Form;
 import play.mvc.Controller;
+import play.mvc.Http;
 import play.mvc.Result;
 import play.mvc.With;
 import views.html.products.details;
 import views.html.products.list;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 
@@ -29,17 +33,11 @@ public class Products extends Controller {
 
         List<Product> product = new Model.Finder<String, Product>(String.class , Product.class).all();
 
-        return ok(list.render(product));
+        return ok(list.render());
 
     }
 
-    public Result show(String ean) {
 
-        Product product =  Product.find.byId(ean) ;
-
-        return TODO; //ok(detail.render(p));
-
-    }
 
     public Result newProduct() {
 
@@ -69,7 +67,7 @@ public class Products extends Controller {
     }
 
     public Result save() {
-
+        Http.MultipartFormData body = request().body().asMultipartFormData();
         Form<Product> boundForm = productForm.bindFromRequest();
 
         if(boundForm.hasErrors()) {
@@ -79,6 +77,17 @@ public class Products extends Controller {
         }
 
         Product product = boundForm.get();
+
+        Http.MultipartFormData.FilePart part = body.getFile("picture");
+        if(part != null) {
+            File picture = part.getFile();
+
+            try {
+                product.picture = Files.toByteArray(picture);
+            } catch (IOException e) {
+                return internalServerError("Error reading file upload");
+            }
+        }
 
 
 
@@ -132,5 +141,7 @@ public class Products extends Controller {
         return redirect(routes.Products.list(1));
     }
 
-}
 
+
+
+}

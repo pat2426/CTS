@@ -12,6 +12,7 @@ GET     /logout                     controllers.Application.logout()
 
 
 
+
 #Tools
 GET /                               controllers.Products.index()
 GET 	/products                   controllers.Products.list(page: Integer ?= 1)
@@ -20,6 +21,7 @@ GET  	/product/new/  				controllers.Products.newProduct()
 POST 	/product					controllers.Products.save()
 DELETE 	/products/:ean 				controllers.Products.delete(ean: String)
 GET  /picture/:ean                  controllers.Products.picture(ean)
+
 
 
 
